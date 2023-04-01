@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "207712300966",
+    "project_id": "devis-social-shop",
+    "storage_bucket": "devis-social-shop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207712300966:android:439080d559cfb68b8fa967",
+        "android_client_info": {
+          "package_name": "com.example.devis_social_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207712300966-guhsn53r0cesb0po9985tttm8ftm2c4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArv0XV6WYWegVFP9yyQmHTxTnPgs3aaxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207712300966-guhsn53r0cesb0po9985tttm8ftm2c4h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
