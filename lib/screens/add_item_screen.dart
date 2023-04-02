@@ -1,8 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devis_social_shop/screens/catalog_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
-import '../models/item_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
@@ -22,6 +21,16 @@ class _AddItemScreenState extends State<AddItemScreen> {
   late String _place;
   String _imagePath = '';
   var _tempImage;
+
+  void _addToBase(String name, String price, String description, String place, String imagePath) {
+    FirebaseFirestore.instance.collection('items').add({
+      'name': name,
+      'price': price,
+      'description': description,
+      'place': place,
+      'image': imagePath,
+    });
+  }
 
   final ImagePicker _picker  =ImagePicker();
 
@@ -124,21 +133,16 @@ class _AddItemScreenState extends State<AddItemScreen> {
                               ElevatedButton(
                                   onPressed: (){
                                     Navigator.of(context).push(MaterialPageRoute(builder: (context)
-                                    => CatalogScreen()));
+                                    => const CatalogScreen()));
                                   },
-                                  child: Text('Cancel')),
-                              Consumer<MainItem>(
-                                builder: (context, value, child) {
-                                  return ElevatedButton(
-                                      onPressed: (){
-                                        Provider.of<MainItem>(context, listen: false)
-                                            .addToBase(_name, _price, _description, _place, _imagePath);
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)
-                                        => CatalogScreen()));
-                                      },
-                                      child: Text('Submit'));
-                                }
-                              ),
+                                  child: const Text('Cancel')),
+                              ElevatedButton(
+                                  onPressed: (){
+                                    _addToBase(_name, _price, _description, _place, _imagePath);
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)
+                                    => const CatalogScreen()));
+                                  },
+                                  child: const Text('Submit')),
                             ],
                           )
                         ],
