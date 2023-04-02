@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/item_widget.dart';
 import 'add_item_screen.dart';
+import 'basket_screen.dart';
 
 class CatalogScreen extends StatefulWidget {
   const CatalogScreen({Key? key}) : super(key: key);
@@ -47,8 +48,17 @@ class _CatalogScreenState extends State<CatalogScreen> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.7,
             color: kBlue.withOpacity(0.4),
-            child: ItemWidget(),
+            child: const ItemWidget(),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)
+                  => BasketScreen()));
+                },
+                icon: const Icon(Icons.shopping_basket_rounded, color: Colors.deepOrange, size: 40,)),
+          )
         ]
       ),
     );
