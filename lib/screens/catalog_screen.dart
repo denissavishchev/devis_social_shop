@@ -1,3 +1,4 @@
+import 'package:devis_social_shop/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/item_widget.dart';
@@ -45,7 +46,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.7,
-            color: Colors.indigo,
+            color: kBlue.withOpacity(0.4),
             child: ItemWidget(),
           ),
         ]

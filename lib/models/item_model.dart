@@ -1,9 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class MainItem extends ChangeNotifier{
-
+  // final String globalName;
+  // final String globalPrice;
+  // final String globalDescription;
+  // final String globalPlace;
+  // final String globalImagePath;
+  //
+  // MainItem({
+  //   required this.globalName,
+  //   required this.globalPrice,
+  //   required this.globalDescription,
+  //   required this.globalPlace,
+  //   required this.globalImagePath,
+  // });
 
 
   void addToBase(String name, String price, String description, String place, String imagePath) {
