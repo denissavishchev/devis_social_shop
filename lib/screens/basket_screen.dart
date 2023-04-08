@@ -16,16 +16,16 @@ class _BasketScreenState extends State<BasketScreen> {
   List basketList = [];
   String total = '';
 
-  String calculate() {
-    double totalPrice = 0;
-    for (int i = 0; i < (basketList.length); i++) {
-        totalPrice += double.parse(basketList[i]);
-    }
-    print('totalPrice: $totalPrice');
-      total = totalPrice.toStringAsFixed(2);
-      // basketList.clear();
-    return totalPrice.toStringAsFixed(2);
-  }
+  // String calculate() {
+  //   double totalPrice = 0;
+  //   for (int i = 0; i < (basketList.length); i++) {
+  //       totalPrice += double.parse(basketList[i]);
+  //   }
+  //   print('totalPrice: $totalPrice');
+  //     total = totalPrice.toStringAsFixed(2);
+  //     // basketList.clear();
+  //   return totalPrice.toStringAsFixed(2);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _BasketScreenState extends State<BasketScreen> {
             child: Container(
               width: 100,
               height: 50,
-              child: Text(calculate()),
+              child: Text('calculate()'),
             ),
           ),
           Container(
@@ -84,7 +84,7 @@ class _BasketScreenState extends State<BasketScreen> {
           const SizedBox(height: 20,),
           ElevatedButton(
               onPressed: (){
-                calculate();
+                // calculate();
                 // basketList.clear();
 
               },

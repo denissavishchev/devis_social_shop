@@ -3,6 +3,7 @@ import 'package:devis_social_shop/screens/item_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import 'icon_button_widget.dart';
 
 class ItemWidget extends StatelessWidget {
   const ItemWidget({Key? key}) : super(key: key);
@@ -10,9 +11,7 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance
-        .collection('items')
-        .snapshots(),
+      stream: FirebaseFirestore.instance.collection('items').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
@@ -23,84 +22,159 @@ class ItemWidget extends StatelessWidget {
               final item = snapshot.data?.docs[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)
-                  => ItemScreen(item: item,)));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ItemScreen(
+                            item: item,
+                          )));
                 },
                 child: Container(
-                  margin: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.only(bottom: 2),
                   width: MediaQuery.of(context).size.width,
-                  height: 160,
-                  color: Colors.transparent,
-                  child: Stack(
+                  height: MediaQuery.of(context).size.height * 0.78,
+                  child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                         child: Row(
                           children: [
-                            Expanded(
-                              flex: 3,
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 3,
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                          color: kGreyBlue,
-                                          borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                          border: Border.all(width: 1, color: kRed)
-                                      ),
-                                      child: Align(
-                                        alignment: Alignment.centerRight,
-                                          child: Text(snapshot.data?.docs[index].get('name'))),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5,),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                          color: kGreyBlue,
-                                          borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                          border: Border.all(width: 1, color: kRed)
-                                      ),
-                                      child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Text(snapshot.data?.docs[index].get('price'))),
-                                    ),
-                                  ),
-                                ],
+                            const CircleAvatar(
+                              backgroundColor: kRed,
+                              radius: 22,
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage('assets/images/avatar.png'),
+                                radius: 20,
                               ),
                             ),
-                            const SizedBox(width: 5,),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: kGreyBlue,
-                                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                    border: Border.all(width: 1, color: kRed)
-                                ),
-                                child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(snapshot.data?.docs[index].get('description'))),
-                              ),
-                            )
+                            const SizedBox(width: 10,),
+                            Column(
+                              children: [
+                                Text(snapshot.data?.docs[index].get('name'), style: kMainStyle),
+                                Text(snapshot.data?.docs[index].get('place'), style: kShadeStyle),
+                              ],
+                            ),
+                            const Spacer(),
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.menu_rounded, color: Colors.white,))
                           ],
                         ),
                       ),
-                      Positioned(
-                        left: 30,
-                        child: Container(
-                          width: 100,
-                          height: 160,
-                          decoration: BoxDecoration(
-                              color: kGreyBlue,
-                              borderRadius: const BorderRadius.all(Radius.circular(10)),
-                              border: Border.all(width: 2, color: kRed)
+                      AspectRatio(
+                        aspectRatio: 200 / 200,
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          width: MediaQuery.of(context).size.width,
+                          child: Image.network(
+                            snapshot.data?.docs[index].get('image'),
+                            fit: BoxFit.fitWidth,
                           ),
-                          child: Image.network(snapshot.data?.docs[index].get('image')),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            IconButtonWidget(
+                              onTap: () {
+                                print('like');
+                              },
+                              imagePassive: 'like_white',
+                              imageActive: 'like_red',
+                              ),
+                            const SizedBox(width: 8,),
+                            IconButtonWidget(
+                                onTap: () {
+                                  print('message');
+                                },
+                                imageActive: 'chat',),
+                            const SizedBox(width: 8,),
+                            IconButtonWidget(
+                              onTap: () {
+                                print('telegram');
+                              },
+                              imageActive: 'telegram',),
+                            const Spacer(),
+                            IconButtonWidget(
+                              onTap: () {
+                                print('bookmark');
+                              },
+                              imageActive: 'bookmark_red',
+                              imagePassive: 'bookmark_white',),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            const CircleAvatar(
+                              backgroundColor: kRed,
+                              radius: 12,
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage('assets/images/avatar.png'),
+                                radius: 10,
+                              ),
+                            ),
+                            const CircleAvatar(
+                              backgroundColor: kRed,
+                              radius: 12,
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage('assets/images/avatar.png'),
+                                radius: 10,
+                              ),
+                            ),
+                            const CircleAvatar(
+                              backgroundColor: kRed,
+                              radius: 12,
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage('assets/images/avatar.png'),
+                                radius: 10,
+                              ),
+                            ),
+                            const SizedBox(width: 8,),
+                            RichText(
+                              text: TextSpan(
+                                text: 'Liked by ', style: kShadeStyle,
+                                children: [
+                                  TextSpan(text: 'Devis', style: kMainStyle),
+                                  TextSpan(text: ' and ', style: kShadeStyle),
+                                  TextSpan(text: '12 others', style: kMainStyle),
+                                ]
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                  text: 'Devis ', style: kMainStyle,
+                                  children: [
+                                    TextSpan(text: 'The best cakes in the world', style: kShadeStyle),
+                                  ]
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            const CircleAvatar(
+                              backgroundColor: kRed,
+                              radius: 12,
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage('assets/images/avatar.png'),
+                                radius: 10,
+                              ),
+                            ),
+                            const SizedBox(width: 8,),
+                            Text('Add a comment...', style: kShadeStyle,),
+                          ],
                         ),
                       ),
                     ],

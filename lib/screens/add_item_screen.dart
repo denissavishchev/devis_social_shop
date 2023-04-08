@@ -35,7 +35,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   final ImagePicker _picker  =ImagePicker();
 
   Future _takePhoto() async {
-    XFile? selectedFile = await _picker.pickImage(source: ImageSource.gallery);
+    XFile? selectedFile = await _picker.pickImage(source: ImageSource.gallery,);
     if (selectedFile == null) return;
 
     String uniqueFileName = DateTime.now().microsecondsSinceEpoch.toString();
