@@ -107,29 +107,17 @@ class ItemWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            const CircleAvatar(
-                              backgroundColor: kRed,
-                              radius: 12,
-                              child: CircleAvatar(
-                                backgroundImage: AssetImage('assets/images/avatar.png'),
-                                radius: 10,
-                              ),
+                            CircleAvatar(
+                              backgroundImage: AssetImage('assets/images/avatar.png'),
+                              radius: 10,
                             ),
-                            const CircleAvatar(
-                              backgroundColor: kRed,
-                              radius: 12,
-                              child: CircleAvatar(
-                                backgroundImage: AssetImage('assets/images/avatar.png'),
-                                radius: 10,
-                              ),
+                            CircleAvatar(
+                              backgroundImage: AssetImage('assets/images/avatar.png'),
+                              radius: 10,
                             ),
-                            const CircleAvatar(
-                              backgroundColor: kRed,
-                              radius: 12,
-                              child: CircleAvatar(
-                                backgroundImage: AssetImage('assets/images/avatar.png'),
-                                radius: 10,
-                              ),
+                            CircleAvatar(
+                              backgroundImage: AssetImage('assets/images/avatar.png'),
+                              radius: 10,
                             ),
                             const SizedBox(width: 8,),
                             RichText(
@@ -164,13 +152,9 @@ class ItemWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            const CircleAvatar(
-                              backgroundColor: kRed,
-                              radius: 12,
-                              child: CircleAvatar(
-                                backgroundImage: AssetImage('assets/images/avatar.png'),
-                                radius: 10,
-                              ),
+                            CircleAvatar(
+                              backgroundImage: AssetImage('assets/images/avatar.png'),
+                              radius: 10,
                             ),
                             const SizedBox(width: 8,),
                             Text('Add a comment...', style: kShadeStyle,),
