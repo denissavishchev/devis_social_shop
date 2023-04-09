@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../widgets/item_widget.dart';
 import 'add_item_screen.dart';
@@ -22,7 +23,18 @@ class _CatalogScreenState extends State<CatalogScreen> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.08,
               color: Colors.black,
-              child: Image.asset('assets/images/logo.gif'),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(width: 40,),
+                    Image.asset('assets/images/logo.gif'),
+                    IconButton(
+                        onPressed: () {
+                          FirebaseAuth.instance.signOut();
+                        },
+                        icon: const Icon(Icons.exit_to_app_outlined,
+                          color: Colors.deepOrange, size: 30,)),
+                  ] ),
             ),
             Expanded(
               child: Container(
