@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devis_social_shop/screens/catalog_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -22,15 +23,34 @@ class _AddItemScreenState extends State<AddItemScreen> {
   String _imagePath = '';
   var _tempImage;
 
+  final user = FirebaseAuth.instance.currentUser!;
+
   void _addToBase(String name, String price, String description, String place, String imagePath) {
-    FirebaseFirestore.instance.collection('items').add({
+    FirebaseFirestore.instance.collection(user.email!).add({
       'name': name,
       'price': price,
       'description': description,
       'place': place,
       'image': imagePath,
+      'isLiked': '0',
+      'isBookmark': '0',
+      'avatar': '',
+      'addedDate': DateTime.now()
+    });
+    FirebaseFirestore.instance.collection('timeLine').add({
+      'name': name,
+      'price': price,
+      'description': description,
+      'place': place,
+      'image': imagePath,
+      'isLiked': '0',
+      'isBookmark': '0',
+      'avatar': '',
+      'addedDate': DateTime.now()
     });
   }
+
+
 
   final ImagePicker _picker  =ImagePicker();
 
@@ -55,6 +75,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
       print(e);
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

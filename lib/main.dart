@@ -1,4 +1,4 @@
-import 'package:devis_social_shop/screens/main_screen.dart';
+import 'package:devis_social_shop/auth_screens/main_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

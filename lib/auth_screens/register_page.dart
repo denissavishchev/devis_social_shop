@@ -1,23 +1,29 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import '../constants.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  final VoidCallback loginPage;
+
+  const RegisterScreen({Key? key, required this.loginPage}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+  Future signUp() async {
+    if (_passwordController.text.trim() ==
+        _confirmPasswordController.text.trim()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
-    );
+      );
+    }
   }
 
   bool _isObscure = true;
@@ -87,8 +93,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           isObscure();
                         },
-                        icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off,
-                          color: Colors.deepOrange, size: 30,)),
+                        icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                          color: Colors.deepOrange,
+                          size: 30,
+                        )),
                     enabledBorder: OutlineInputBorder(
                       borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(12),
@@ -107,9 +116,42 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 16,
               ),
               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: TextField(
+                  obscureText: _isObscure,
+                  controller: _confirmPasswordController,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          isObscure();
+                        },
+                        icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                          color: Colors.deepOrange,
+                          size: 30,
+                        )),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: kRed),
+                        borderRadius: BorderRadius.circular(12)),
+                    hintText: 'Confirm Password',
+                    hintStyle: const TextStyle(color: Colors.white),
+                    filled: true,
+                    fillColor: Colors.black,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
-                    onTap: signIn,
+                    onTap: signUp,
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: const BoxDecoration(
@@ -120,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       child: const Center(
                         child: Text(
-                          'Sign in',
+                          'Sign Up',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -136,18 +178,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Not a member? ',
+                    'Already a member? ',
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   TextButton(
                     onPressed: () {
-                      print('object');
+                      widget.loginPage();
                     },
                     child: const Text(
-                      ' Register now',
-                        style: TextStyle(
-                          color: kRed, fontWeight: FontWeight.bold, ),
+                      ' Log in',
+                      style: TextStyle(
+                        color: kRed,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   )
                 ],

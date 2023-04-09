@@ -1,7 +1,9 @@
 import 'package:devis_social_shop/screens/catalog_screen.dart';
-import 'package:devis_social_shop/screens/login_screen.dart';
+import 'package:devis_social_shop/auth_screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'auth_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class MainScreen extends StatelessWidget {
           if (snapshot.hasData) {
             return const CatalogScreen();
           }else{
-            return const LoginScreen();
+            return const AuthScreen();
           }
         },
       ),

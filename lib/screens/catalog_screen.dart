@@ -1,3 +1,5 @@
+import 'package:devis_social_shop/auth_screens/auth_screen.dart';
+import 'package:devis_social_shop/auth_screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../widgets/item_widget.dart';
@@ -31,6 +33,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     IconButton(
                         onPressed: () {
                           FirebaseAuth.instance.signOut();
+                          // Navigator.of(context).push(MaterialPageRoute(builder: (context)
+                          // => const AuthScreen()));
                         },
                         icon: const Icon(Icons.exit_to_app_outlined,
                           color: Colors.deepOrange, size: 30,)),
@@ -40,7 +44,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 color: Colors.black,
-                child: const ItemWidget(),
+                child: ItemWidget(),
               ),
             ),
             Container(
@@ -52,8 +56,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                 children: [
                   IconButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)
-                        => const BasketScreen()));
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context)
+                        // => const BasketScreen()));
                       },
                       icon: const Icon(Icons.shopping_basket_rounded, color: Colors.deepOrange, size: 30,)),
                   IconButton(
